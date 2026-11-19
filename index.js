@@ -1,3 +1,7 @@
-console.log("Hello from my todo app");
-console.log(process.argv);
-if (process.argv [2] =="add") { console.log("adding your task"); }
+const { loadTodos, saveTodos } = require("./storage");
+if (process.argv[2] === "add") {
+    const todos = loadTodos();
+    todos.push({ id: todos.length + 1, text: process.argv[3], done: false });
+    saveTodos(todos);
+    console.log("Added: " + process.argv[3]);
+}
